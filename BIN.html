@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>导入 JSON 数据示例</title>
+</head>
+
+<body>
+  <h1>JSON 数据示例</h1>
+  <div id="output"></div>
+
+  <script>
+    // 初始化 data.nodes 变量
+    let data = {
+      nodes: null
+    };
+
+    // 使用 fetch 获取 JSON 数据
+    fetch('neo4j_data_node.json') // 替换为你的 JSON 文件路径
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json(); // 解析 JSON 数据
+      })
+      .then(jsonData => {
+        // 将 JSON 数据分配给 data.nodes 变量
+        data.nodes = jsonData;
+        // 在这里你可以处理 data.nodes，如在控制台中输出它
+        console.log(data.nodes);
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+
+  </script>
+</body>
+
+</html>

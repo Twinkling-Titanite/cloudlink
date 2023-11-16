@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MainPage</title>
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/kg.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <style>
+        body {
+            background: linear-gradient(90deg, #ffffff, #d2e0f8)
+        }
+
+        .container {
+            width: 100%;
+            height: 35rem;
+
+            float: right;
+            display: flex;
+        }
+
+        .btn_container {
+            width: 100%;
+            height: 10rem;
+            text-align: center;
+        }
+
+        .btn_container:after {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        #toast-container {
+            top: 80%;
+            right: 45%;
+        }
+    </style>
+    <style>
+        .main-top-meun-container {
+            /* 矩形 8 */
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            left: 0%;
+            right: 0%;
+            top: 0%;
+            bottom: 88.28%;
+
+
+            background: rgba(232, 233, 233, 0.5);
+        }
+
+        .main-top-meun-main {
+            position: absolute;
+            width: 100%;
+            height: 49%;
+            left: 0;
+            top: 0;
+
+            background: rgba(232, 233, 233, 0.5);
+        }
+
+        .main-top-meun-tool {
+            position: absolute;
+            width: 100%;
+            height: 49%;
+            left: 0;
+            top: 50%;
+
+            background: rgba(130, 133, 133, 0.5);
+        }
+
+        .main-left-edit-container {
+            position: absolute;
+            width: 350px;
+            height: 88%;
+            left: 0;
+            top: 100px;
+
+            background: rgb(218, 215, 215);
+        }
+
+        .main-left-edit-tool {
+            /* 矢量 15 */
+            position: absolute;
+            width: 100%;
+            height: 53px;
+            left: 0%;
+            top: 0%;
+            display: flex;
+            background: rgba(130, 133, 133, 0.5);
+        }
+
+        .main-left-edit-tool-add {
+            /* 24/ outlined / suggested / circle / + */
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            left: 3%;
+            top: 22%;
+            padding: 0;
+            background-color: rgba(130, 133, 133, 0);
+            border-color: rgba(130, 133, 133, 0);
+        }
+
+        .main-left-edit-tool-edit {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: 22%;
+            padding: 0;
+            background-color: rgba(130, 133, 133, 0);
+            border-color: rgba(130, 133, 133, 0);
+            margin-left: 50px;
+        }
+
+        .main-left-edit-tool-find {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: 22%;
+            padding: 0;
+            background-color: rgba(130, 133, 133, 0);
+            border-color: rgba(130, 133, 133, 0);
+            margin-left: 90px;
+        }
+
+        .main-left-edit-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 53px;
+            overflow: scroll;
+        }
+
+        .main-left-edit-content-top {
+            position: absolute;
+            width: 95%;
+            height: 52px;
+            top: 50px;
+            left: 2.5%;
+            background-color: rgb(81, 91, 135);
+            font-size: 20px;
+            color: aliceblue;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+
+        }
+
+        .main-left-edit-content-input-container {
+            position: absolute;
+            width: 350px;
+            height: 80%;
+            left: 0;
+            top: 150px;
+            display: flex;
+            flex-direction: column;
+            /* 垂直排布 */
+            align-items: center;
+            /* 水平居中 */
+            padding: 20px, 20px;
+            overflow: scroll;
+        }
+
+        .main-left-edit-content-input {
+            width: 90%;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .main-left-edit-content-button {
+            width: 200px;
+            height: 45px;
+            margin-top: 0px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            background-color: rgb(81, 91, 135);
+
+            color: aliceblue;
+            font-size: 15px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            position: absolute;
+            width: 100%;
+            height: 80%;
+            right: 0;
+            top: 100px;
+
+            float: right;
+            display: flex;
+            background-color: rgb(255, 255, 255);
+        }
+
+        .main-left-edit-content-input-link-container {
+            width: 250px;
+            height: 300px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            overflow: auto;
+
+        }
+
+        .main-left-edit-links-add {
+            /* 24/ outlined / suggested / circle / + */
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            top: 5px;
+            right: 5%;
+            padding: 0;
+            background-color: rgba(130, 133, 133, 0);
+            border-color: rgba(130, 133, 133, 0);
+        }
+
+        .main-left-edit-links-del {
+            /* 24/ outlined / suggested / circle / + */
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            bottom: 0%;
+            right: 0%;
+            padding: 0;
+            background-color: rgba(130, 133, 133, 0);
+            border-color: rgba(130, 133, 133, 0);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-top-meun-container">
+        <div class="main-top-meun-main"></div>
+        <div class="main-top-meun-tool"></div>
+    </div>
+    <div class="main-left-edit-container">
+        <div class="main-left-edit-tool">
+            <button class="main-left-edit-tool-add" id="button-add" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasScrollingadd" aria-controls="offcanvasScrollingadd">
+                <img src="img/addbutton-on.svg">
+            </button>
+            <button class="main-left-edit-tool-edit" id="button-edit" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasScrollingedit" aria-controls="offcanvasScrollingedit">
+                <img src="img/editbutton-on.svg">
+            </button>
+            <button class="main-left-edit-tool-find" id="button-find" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasScrollingfind" aria-controls="offcanvasScrollingfind">
+                <img src="img/findbutton-on.svg">
+            </button>
+
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+                id="offcanvasScrollingadd" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasScrollingLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <label class="main-left-edit-content-top">新增节点</label>
+                    <div class="main-left-edit-content-input-container">
+                        <div class="main-left-edit-content-input">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="name-input" placeholder="名称">
+                                <label for="floatingInput">名称</label>
+                            </div>
+                        </div>
+                        <div class="main-left-edit-content-input">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="type-input" placeholder="属性">
+                                <label for="floatingInput">属性</label>
+                            </div>
+                        </div>
+                        <div class="main-left-edit-content-input">
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="text-input"
+                                    style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">描述</label>
+                            </div>
+                        </div>
+                        <button class="main-left-edit-content-button" id="addTextButton">创建</button>
+                    </div>
+                </div>
+            </div>
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+                id="offcanvasScrollingedit" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasScrollingLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="main-left-edit-content-top">编辑节点</div>
+                    <div class="main-left-edit-content-input-container">
+                        <div class="main-left-edit-content-input">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item active" aria-current="true">节点关系：source
+                                    <button class="main-left-edit-links-add" id="add-link-source"><img
+                                            src="img/addbutton-off.svg"></button>
+                                </li>
+                                <ul id="source-links"></ul>
+                            </ul>
+                        </div>
+                        <div class="main-left-edit-content-input">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item active" aria-current="true">节点关系：targer
+                                    <button class="main-left-edit-links-add" id="add-link-targer"><img
+                                            src="img/addbutton-off.svg"></button>
+                                </li>
+                                <ul id="targer-links"></ul>
+                            </ul>
+                        </div>
+                        <div class="main-left-edit-content-input">
+                            <form class="form-floating">
+                                <input type="text" class="form-control" id="name-edit" placeholder="名称" value="待定">
+                                <label for="floatingInputValue">名称</label>
+                            </form>
+                        </div>
+                        <div class="main-left-edit-content-input">
+                            <form class="form-floating">
+                                <input type="text" class="form-control" id="type-edit" placeholder="属性" value="待定">
+                                <label for="floatingInputValue">属性</label>
+                            </form>
+                        </div>
+                        <div class="main-left-edit-content-input">
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="描述" id="text-edit"
+                                    style="height: 100px">待定</textarea>
+                                <label for="floatingTextarea2">描述</label>
+                            </div>
+                        </div>
+                        
+                        <button class="main-left-edit-content-button">开始渲染</button>
+                    </div>
+                </div>
+            </div>
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+                id="offcanvasScrollingfind" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasScrollingLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div class="row" style="
+                    margin-top: 10px;
+                    display: flex;
+                ">
+                        <ul class="collapsible" data-collapsible="accordion" style="
+                        margin-left: 4rem;width: 26rem
+                    ">
+                            <li class="active">
+                                <div class="collapsible-header">节点数据</div>
+                                <div class="collapsible-body" style="display: block;">
+                                    <div class="row">
+                                        <form class="col s12">
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <textarea id="t1" class="materialize-textarea"
+                                                        style="border-bottom: 0px;width: 24rem;"></textarea>
+                                                    <label for="textarea1">请输入节点数据</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="active">
+                                <div class="collapsible-header">关系数据</div>
+                                <div class="collapsible-body" style="display: block;">
+                                    <div class="row">
+                                        <form class="col s12">
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <textarea id="t2" class="materialize-textarea"
+                                                        style="border-bottom: 0px;width: 24rem;"></textarea>
+                                                    <label for="textarea1">请输入关系数据</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="active">
+                                <div class="collapsible-header">节点配色</div>
+                                <div class="collapsible-body" style="display: block;">
+                                    <div class="row">
+                                        <form class="col s12">
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <textarea id="t3" class="materialize-textarea"
+                                                        style="border-bottom: 0px;width: 24rem;"></textarea>
+                                                    <label for="textarea1">请输入节点配色</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="active">
+                                <div class="collapsible-header">关系配色</div>
+                                <div class="collapsible-body" style="display: block;">
+                                    <div class="row">
+                                        <form class="col s12">
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <textarea id="t4" class="materialize-textarea"
+                                                        style="border-bottom: 0px;width: 24rem;"></textarea>
+                                                    <label for="textarea1">请输入关系配色</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="active">
+                                <div class="collapsible-header">回显内容</div>
+                                <div class="collapsible-body" style="display: block;">
+                                    <div class="row">
+                                        <form class="col s12">
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <textarea id="t5" class="materialize-textarea"
+                                                        style="border-bottom: 0px;width: 24rem;"></textarea>
+                                                    <label for="textarea1">请输入回显内容</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="btn_container">
+                                <a class="waves-effect waves-light btn-large" href="javascript:render();">渲染</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-left-edit-content">
+            <div class="accordion" id="accordionExample">
+                <ul id="data-list"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="container"></div>
+
+
+
+
+
+    <script src="js/d3.v3.min.js"></script>
+    <script src="js/kg.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script>
+
+    </script>
+    <script>
+        var t1_text = '{' +
+            '"1": {"name": "数据结构","type": "学科"},\n' +
+            '"2": { "name": "二叉树", "type": "知识点"},\n' +
+            '"3": {"name": "链表","type": "知识点"},\n' +
+            '"4": {"name": "平衡二叉树","type": "知识点"},\n' +
+            '"5": {"name": "二叉树的结构讲解","url": "www.mooc.com/15.html",\n' +
+            '"type": "视频资源"},\n' +
+            '"6": {"name": "链表的反转",\n' +
+            '"url": "www.mooc.com/1.ppt",\n' +
+            '"type": "ppt资源"\n' +
+            '},\n' +
+            '"7": {"name": "闲节点","type": "闲"},\n' +
+            '"8": {"name": "闲节点2","type": "闲"},\n' +
+            '"9": {"name": "闲节点3","type": "闲"},\n' +
+            '"10": {"name": "芳芳老师","type": "老师"},\n' +
+            '"11": {"name": "月老师","type": "老师"}\n' +
+            '}'
+        document.getElementById("t1").value = t1_text;
+        var t2_text = "[\n" +
+            '{ "source": 1, "target": 2, "rela": "包含", "type": "包含关系" },\n' +
+            '{ "source": 1, "target": 3, "rela": "包含", "type": "包含关系" },\n' +
+            '{ "source": 1, "target": 4, "rela": "包含", "type": "包含关系" },\n' +
+            '{ "source": 2, "target": 5, "rela": "视频课程", "type": "资源" },\n' +
+            '{ "source": 3, "target": 6, "rela": "ppt教程", "type": "资源" },\n' +
+            '{ "source": 3, "target": 7, "rela": "没关系" },\n' +
+            '{ "source": 8, "target": 9, "rela": "没关系" },\n' +
+            '{ "source": 10, "target": 5, "rela": "授课", "type": "行为" },\n' +
+            '{ "source": 11, "target": 6, "rela": "授课", "type": "行为" }\n' +
+            "]"
+        document.getElementById("t2").value = t2_text;
+
+
+
+        contentHook = function (item) {
+            return "<div>" + item.name + "</div>"
+        }
+        function render() {
+            try {
+                $("svg").remove()
+                var data = {}
+                data.nodes = JSON.parse(document.getElementById("t1").value);
+                data.links = JSON.parse(document.getElementById("t2").value);
+                console.log(data.nodes)
+                console.log(data.links);
+
+                var config = {
+                    //鼠标mouseover后的弹窗
+                    content: document.getElementById("t5").value,
+                    contentHook: null,
+                    //节点配色方案（可为空)
+                    nodeColor: document.getElementById("t3").value ? JSON.parse(document.getElementById("t3").value) : null,
+                    //连接线配色方案（可为空）
+                    linkColor: document.getElementById("t4").value ? JSON.parse(document.getElementById("t4").value) : null,
+                    width: document.getElementById("container").clientWidth,
+                    height: document.getElementById("container").clientHeight
+                }
+                initKG(data, config, "#container")
+            } catch (err) {
+                Materialize.toast('渲染存在异常', 2000)
+                console.info(err)
+            }
+
+
+
+            // 获取包含节点的无序列表
+            var dataList = document.getElementById("data-list");
+
+            // 遍历所有节点对象
+            for (var nodeId in data.nodes) {
+                if (data.nodes.hasOwnProperty(nodeId)) {
+                    var node = data.nodes[nodeId];
+
+                    // 创建一个新的列表项
+                    var listItem = document.createElement("div");
+
+                    // 设置列表项的内容，显示节点属性
+                    listItem.innerHTML = '<h2 class="accordion-header">'
+                        + '<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"data-bs-target="#collapse' + nodeId + '" aria-expanded="true" aria-controls="collapse' + nodeId + '">'
+                        + node.name
+                        + '</button>'
+                        + '</h2>'
+                        + '<div id="collapse' + nodeId + '" class="accordion-collapse collapse"data-bs-parent="#accordionExample"><div class="form-floating mb-3"><textarea class="form-control" placeholder="Leave a comment here"id="floatingTextarea2Disabled" style="height: 100px" disabled>'
+                        + node.type + '</textarea>'
+                        + '<label for="floatingTextarea2Disabled">描述</label>';
+                    dataList.appendChild(listItem);
+                }
+            }
+        }
+        render();
+
+    </script>
+    <script>
+        // 获取所有删除按钮
+        var deleteButtons = document.querySelectorAll('.main-left-edit-links-del');
+        // 给每个按钮添加点击事件处理程序
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                // 找到父级 <li> 元素并从 DOM 中删除它
+                var listItem = this.parentElement;
+                listItem.remove();
+            });
+        });
+    </script>
+    <script>
+        var TargeraddButton = document.getElementById('add-link-targer');
+        TargeraddButton.addEventListener('click', function () {
+            // 创建一个新的 <li> 元素
+            var newListItem = document.createElement('li');
+            newListItem.className = 'list-group-item';
+
+            //创建一个新的区块row2
+            var divrowg2 = document.createElement('div');
+            divrowg2.classList.add('row', 'g-2');
+
+            //创建一个新区块molmd1
+            var divmolmd1 = document.createElement('div');
+            divmolmd1.className = 'col-md';
+
+            //新建一个form floating1
+            var formfloating1 = document.createElement('form');
+            formfloating1.className = 'form-floating';
+
+            //新建一个input1和label1
+            var input1 = document.createElement('input');
+            input1.className = 'form-control';
+            input1.id = 'name-edit';
+            input1.placeholder = '名称';
+            input1.value = '待定';
+            input1.type = 'text';
+            var label1 = document.createElement('label');
+            label1.textContent = '名称';
+            label1.htmlFor = 'floatingInputValue';
+
+            formfloating1.appendChild(input1);
+            formfloating1.appendChild(label1);
+
+
+            //floating1属于colmd1
+            divmolmd1.appendChild(formfloating1);
+
+            //molmd1属于row2
+            divrowg2.appendChild(divmolmd1);
+
+            //创建一个新区块molmd2
+            var divmolmd2 = document.createElement('div');
+            divmolmd2.className = 'col-md';
+
+            //新建一个form floating2
+            var formfloating2 = document.createElement('form');
+            formfloating2.className = 'form-floating';
+
+            //新建一个input2和label2
+            var input2 = document.createElement('input');
+            input2.className = 'form-control';
+            input2.id = 'link-edit';
+            input2.placeholder = '关系';
+            input2.value = '待定';
+            input2.type = 'text';
+            var label2 = document.createElement('label');
+            label2.textContent = '关系';
+            label2.htmlFor = 'floatingInputValue';
+
+            formfloating2.appendChild(input2);
+            formfloating2.appendChild(label2);
+
+
+            //floating2属于colmd2
+            divmolmd2.appendChild(formfloating2);
+
+            divrowg2.appendChild(divmolmd2);
+
+            //divrowg2.innerHTML='<div class="col-md"><form class="form-floating"><input type="text" class="form-control" id="name-edit" placeholder="名称" value="待定"><label for="floatingInputValue">名称</label></form></div><div class="col-md"><form class="form-floating"><input type="text" class="form-control" id="link-edit" placeholder="名称" value="待定"><label for="floatingInputValue">关系</label></form></div>';
+
+            // 创建一个新的删除按钮，用自定义图像
+            var deleteButton = document.createElement('button');
+            deleteButton.className = 'main-left-edit-links-del';
+
+            var deleteIcon = document.createElement('img');
+            deleteIcon.src = 'img/delbutton.svg'; // 自定义图像的路径
+
+            // 添加图像元素到删除按钮
+            deleteButton.appendChild(deleteIcon);
+
+            // 将新的删除按钮添加到新的 <li> 元素
+            newListItem.appendChild(deleteButton);
+            //row2属于li
+            newListItem.appendChild(divrowg2);
+
+            // 将新的 <li> 元素添加到列表
+            document.getElementById('targer-links').appendChild(newListItem);
+
+            // 为新的删除按钮添加点击事件处理程序
+            deleteButton.addEventListener('click', function () {
+                newListItem.remove(); // 删除新项目
+            });
+        });
+    </script>
+    <script>
+        var SourceaddButton = document.getElementById('add-link-source');
+        SourceaddButton.addEventListener('click', function () {
+            // 创建一个新的 <li> 元素
+            var newListItem = document.createElement('li');
+            newListItem.className = 'list-group-item';
+
+            //创建一个新的区块row2
+            var divrowg2 = document.createElement('div');
+            divrowg2.classList.add('row', 'g-2');
+
+            //创建一个新区块molmd1
+            var divmolmd1 = document.createElement('div');
+            divmolmd1.className = 'col-md';
+
+            //新建一个form floating1
+            var formfloating1 = document.createElement('form');
+            formfloating1.className = 'form-floating';
+
+            //新建一个input1和label1
+            var input1 = document.createElement('input');
+            input1.className = 'form-control';
+            input1.id = 'name-edit';
+            input1.placeholder = '名称';
+            input1.value = '待定';
+            input1.type = 'text';
+            var label1 = document.createElement('label');
+            label1.textContent = '名称';
+            label1.htmlFor = 'floatingInputValue';
+
+            formfloating1.appendChild(input1);
+            formfloating1.appendChild(label1);
+
+
+            //floating1属于colmd1
+            divmolmd1.appendChild(formfloating1);
+
+            //molmd1属于row2
+            divrowg2.appendChild(divmolmd1);
+
+            //创建一个新区块molmd2
+            var divmolmd2 = document.createElement('div');
+            divmolmd2.className = 'col-md';
+
+            //新建一个form floating2
+            var formfloating2 = document.createElement('form');
+            formfloating2.className = 'form-floating';
+
+            //新建一个input2和label2
+            var input2 = document.createElement('input');
+            input2.className = 'form-control';
+            input2.id = 'link-edit';
+            input2.placeholder = '关系';
+            input2.value = '待定';
+            input2.type = 'text';
+            var label2 = document.createElement('label');
+            label2.textContent = '关系';
+            label2.htmlFor = 'floatingInputValue';
+
+            formfloating2.appendChild(input2);
+            formfloating2.appendChild(label2);
+
+
+            //floating2属于colmd2
+            divmolmd2.appendChild(formfloating2);
+
+            divrowg2.appendChild(divmolmd2);
+
+            //divrowg2.innerHTML='<div class="col-md"><form class="form-floating"><input type="text" class="form-control" id="name-edit" placeholder="名称" value="待定"><label for="floatingInputValue">名称</label></form></div><div class="col-md"><form class="form-floating"><input type="text" class="form-control" id="link-edit" placeholder="名称" value="待定"><label for="floatingInputValue">关系</label></form></div>';
+
+            // 创建一个新的删除按钮，用自定义图像
+            var deleteButton = document.createElement('button');
+            deleteButton.className = 'main-left-edit-links-del';
+
+            var deleteIcon = document.createElement('img');
+            deleteIcon.src = 'img/delbutton.svg'; // 自定义图像的路径
+
+            // 添加图像元素到删除按钮
+            deleteButton.appendChild(deleteIcon);
+
+            // 将新的删除按钮添加到新的 <li> 元素
+            newListItem.appendChild(deleteButton);
+            //row2属于li
+            newListItem.appendChild(divrowg2);
+
+            // 将新的 <li> 元素添加到列表
+            document.getElementById('source-links').appendChild(newListItem);
+
+            // 为新的删除按钮添加点击事件处理程序
+            deleteButton.addEventListener('click', function () {
+                newListItem.remove(); // 删除新项目
+            });
+        });
+    </script>
+</body>
+
+</html>

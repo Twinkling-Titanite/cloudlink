@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SignPage</title>
+    <link rel="stylesheet" type="text/css" href="css/signpage.css">
+</head>
+
+<body>
+    <div class="full-container">
+        <div class="sign-container-bg">
+            <div class="sign-expain-container">
+                <label class="sign-expain-text">Study with us.<br>Create your own knowledge graph here.</label>
+            </div>
+            <div class="sign-container">
+                <label class="sign-logo">Cloudlink</label>
+                <div class="sign-input-container">
+                    <div class="sign-input">
+                        <input type="text" placeholder="用户名" id="username" name="username" required>
+                    </div>
+                    <div class="sign-input">
+                        <input type="password" placeholder="密码" id="password-unsure" name="password-unsure" required>
+                        <span class="sign-input-password-switch-unsure" id="password-toggle-unsure">
+                            <img src="img/eye-off-outline.svg">
+                        </span>
+                    </div>
+                    <div class="sign-input">
+                        <input type="password" placeholder="确认密码" id="password-sure" name="password-sure" required>
+                        <span class="sign-input-password-switch-sure" id="password-toggle-sure">
+                            <img src="img/eye-off-outline.svg">
+                        </span>
+                    </div>
+                </div>
+                <button class="sign-button" id="sign-button">注册</button>
+                <span class="sign-to-login" id="sign-to-login">已拥有账户？</span>
+            </div>
+            <div class="sign-img-computer"></div>
+            <div class="sign-img-math"></div>
+            <div class="sign-img-ball"></div>
+            <div class="sign-img-data"></div>
+        </div>
+    </div>
+<script src="js/signpage.js"></script>
+</body>o
+
+</html>
